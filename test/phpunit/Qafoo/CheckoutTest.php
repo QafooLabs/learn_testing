@@ -12,7 +12,10 @@ class CheckoutTest extends \PHPUnit_Framework_TestCase
     {
         $this->displayMock = $this->getMock('Qafoo\\Display');
 
-        $this->checkout = new Checkout($this->displayMock);
+        $this->checkout = new Checkout(
+            $this->displayMock,
+            new PriceLookup()
+        );
     }
 
     public function testScanSingleProduct()

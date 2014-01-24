@@ -6,22 +6,19 @@ class Checkout
 {
     private $sum = 0;
 
-    private $products;
-
     private $display;
 
-    public function __construct(Display $display)
+    private $priceLookup;
+
+    public function __construct(Display $display, PriceLookup $priceLookup)
     {
         $this->display = $display;
-        $this->products = array(
-            'pear' => 0.59,
-            'apple' => 0.41,
-        );
+        $this->priceLookup = $priceLookup;
     }
 
     public function scan($article)
     {
-        $this->sum += $this->products[$article];
+        $this->sum += $this->priceLookup->getPrice($article);
         $this->display->show($this->sum);
     }
 
