@@ -16,6 +16,9 @@ class PriceLookup
 
     public function getPrice($product)
     {
+        if (!isset($this->products[$product])) {
+            throw new \RuntimeException('Not a product from here!');
+        }
         return $this->products[$product];
     }
 }

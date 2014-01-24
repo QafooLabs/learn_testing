@@ -52,4 +52,13 @@ class CheckoutTest extends \PHPUnit_Framework_TestCase
 
         $checkout->scan('pear');
     }
+
+    public function testScanNonExistentProductThrowsException()
+    {
+        $checkout = $this->checkout;
+
+        $this->setExpectedException('\RuntimeException');
+
+        $checkout->scan('banana');
+    }
 }
