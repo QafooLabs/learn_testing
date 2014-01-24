@@ -1,8 +1,13 @@
 {
-    "require": {
-        "php": ">=5.5"
-    },
     "require-dev": {
         "phpunit/phpunit": "@stable"
+    },
+    "autoload": {
+        "psr-0": {
+            "Qafoo": ["src/main", "test/phpunit"]
+        }
+    },
+    "config": {
+        "bin-dir": "vendor/bin/"
     }
 }
