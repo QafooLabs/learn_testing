@@ -4,9 +4,20 @@ namespace Qafoo;
 
 class CheckoutTest extends \PHPUnit_Framework_TestCase
 {
+    private $checkout;
+
+    private $displayMock;
+
+    public function setUp()
+    {
+        $this->displayMock = $this->getMock('Qafoo\\Display');
+
+        $this->checkout = new Checkout($this->displayMock);
+    }
+
     public function testScanSingleProduct()
     {
-        $checkout = new Checkout();
+        $checkout = $this->checkout;
 
         $checkout->scan('pear');
 
@@ -18,7 +29,7 @@ class CheckoutTest extends \PHPUnit_Framework_TestCase
 
     public function testScanMultipleProducts()
     {
-        $checkout = new Checkout();
+        $checkout = $this->checkout;
 
         $checkout->scan('pear');
         $checkout->scan('apple');
@@ -27,5 +38,15 @@ class CheckoutTest extends \PHPUnit_Framework_TestCase
             1.0,
             $checkout->getSum()
         );
+    }
+
+    public function testDisplaysSumAfterScanning()
+    {
+        $checkout = $this->checkout;
+
+        $this->displayMock->expects($this->once())
+            ->method('show');
+
+        $checkout->scan('pear');
     }
 }

@@ -8,8 +8,11 @@ class Checkout
 
     private $products;
 
-    public function __construct()
+    private $display;
+
+    public function __construct(Display $display)
     {
+        $this->display = $display;
         $this->products = array(
             'pear' => 0.59,
             'apple' => 0.41,
@@ -19,6 +22,7 @@ class Checkout
     public function scan($article)
     {
         $this->sum += $this->products[$article];
+        $this->display->show($this->sum);
     }
 
     public function getSum()
